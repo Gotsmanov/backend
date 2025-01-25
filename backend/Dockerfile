@@ -9,13 +9,13 @@ COPY *.sln .
 COPY YourProjectName/*.csproj ./YourProjectName/
 
 # Восстанавливаем зависимости
+WORKDIR /app/YourProjectName
 RUN dotnet restore
 
 # Копируем все файлы в контейнер
 COPY . .
 
 # Сборка приложения
-WORKDIR /app/YourProjectName
 RUN dotnet publish -c Release -o /app/publish
 
 # Используем минимальный runtime образ для запуска
